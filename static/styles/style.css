@@ -1,0 +1,113 @@
+/*
+  ==============================================
+  IDENTIDADE VISUAL SINDCODE - PALETA DE CORES
+  ==============================================
+  Definimos as cores da marca como variáveis CSS
+  para uso fácil e consistente em todo o site.
+*/
+:root {
+  /* Paleta Principal */
+  --sindcode-azul-principal: #1A2C50; /* (Azul Sindcode) Para confiança, headers, footers */
+  --sindcode-azul-tech: #011015;      /* (Azul Tech) Para links, destaques, inovação */
+  --sindcode-verde-acao: #A6E22E;     /* (Verde Renovação) Para botões de CTA (Call-to-Action) */
+  --sindcode-roxo-comunidade: #C724B1; /* (Roxo Comunidade) Para badges, eventos, ênfase */
+
+  /* Paleta Neutra (Modo Claro) */
+  --sindcode-fundo-claro: #F8F9FA;    /* (Branco Digital) Fundo principal do conteúdo */
+  --sindcode-texto-principal: #212529;  /* (Grafite Texto) Para parágrafos, alta legibilidade */
+
+  /* Paleta Neutra (Modo Escuro) */
+  --sindcode-fundo-escuro: #121A2A;   /* (Grafite Profundo) Fundo do body, headers, footers */
+  --sindcode-texto-secundario: #ADB5BD; /* (Cinza Suporte) Texto sobre fundos escuros */
+  
+  /* Cor de Borda */
+  --sindcode-borda: #ffffff;          /* Borda sutil para o modo claro */
+}
+
+
+/*
+  ==============================================
+  APLICAÇÃO DAS CORES NO SEU LAYOUT
+  ==============================================
+  Seu CSS original foi adaptado para usar as variáveis da marca.
+*/
+
+/*
+    O 'body' define o fundo geral.
+    Usamos o --sindcode-fundo-escuro, que é o nosso 'Grafite Profundo'.
+    Isso substitui o 'black' por uma cor de marca mais profissional.
+*/
+body {
+  background-color: var(--sindcode-fundo-escuro);
+  color: var(--sindcode-texto-principal); /* Cor de texto padrão (para o conteúdo em 'main') */
+  /* Removemos a cor de texto branca daqui, pois 'main' é claro */
+}
+
+/*
+    Classe para textos em azul.
+    Usamos o --sindcode-azul-tech, nossa cor de inovação.
+    Perfeito para links ou destaques.
+*/
+.para_azul {
+  color: var(--sindcode-azul-tech);
+}
+
+/*
+    Elemento no topo.
+    Substituímos o verde escuro pelo --sindcode-azul-principal.
+    Isso cria uma 'âncora' visual forte e confiável no topo da página.
+*/
+#topo {
+  background-color: var(--sindcode-azul-principal);
+  width: 1852px; /* Nota: considere usar '100%' em vez de '1852px' para responsividade */
+  height: 160px;
+  border: 2px solid var(--sindcode-azul-tech); /* Usamos o azul tech para uma borda vibrante */
+}
+
+/*
+    Barra de mídias e busca.
+    Usamos o --sindcode-fundo-escuro, nosso 'Grafite Profundo',
+    que é mais rico que o '#101010' original.
+*/
+#midias_busca {
+  background-color: var(--sindcode-fundo-escuro);
+  width: 100%;
+  height: 52px;
+}
+
+/*
+    Área do logo e menu.
+    Substituímos o '#FFFFFF' puro pelo nosso 'Branco Digital'
+    (--sindcode-fundo-claro), que é mais suave para os olhos.
+*/
+#logo_menu {
+  background-color: var(--sindcode-fundo-claro);
+  width: 100%;
+  height: 108px;
+}
+
+/*
+    Conteúdo principal.
+    Aqui entra o fundo claro para legibilidade.
+    Substituímos o '#fdfaed' (creme) pelo nosso 'Branco Digital'
+    e a borda escura por uma borda sutil.
+*/
+main {
+  width: 100%;
+  height: 1200px; /* Considere usar 'min-height' em vez de 'height' */
+  border: 2px solid var(--sindcode-borda);
+  background-color: var(--sindcode-fundo-claro);
+  color: var(--sindcode-texto-principal); /* Garante que o texto aqui seja escuro */
+}
+
+/*
+    Rodapé.
+    Substituímos o vermelho escuro pelo --sindcode-azul-principal.
+    Isso faz o rodapé 'combinar' com o topo (#topo),
+    criando equilíbrio e fechando o layout com a cor de confiança da marca.
+*/
+footer {
+  height: 67px;
+  background-color: var(--sindcode-azul-principal);
+  color: var(--sindcode-texto-secundario); /* Texto claro sobre fundo escuro */
+}

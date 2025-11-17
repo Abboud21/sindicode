@@ -1,0 +1,21 @@
+{% extends 'noticias/base.html' %} <!-- DTL - Django Template Language -->
+{% load static %}
+{% block content %}
+    <h1>Cadastro de associado</h1>
+    <form>
+        CPF <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX">
+        RG <input type="text" name="rg">
+        Nome Completo <input type="text" name="nome_completo">
+        Nome Social <input type="text" name="nome_social">
+        Genero
+        <select>
+            <option value="m">Masculino</option>
+            <option value="f">Feminino</option>
+            <option value="b">Binário</option>
+            <option value="o">Outros</option>
+            <option value="n">Prefiro não responder</option>
+        </select>
+        Data nascimento <input type="date" name="dt_nasc">
+        <input type="submit" value="cadastrar">
+    </form>
+{% endblock %}

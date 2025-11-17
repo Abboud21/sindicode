@@ -1,0 +1,122 @@
+
+
+/* * =========================================
+ * CSS Unificado (Paleta Sindcode + Bootstrap)
+ * =========================================
+ */
+
+:root {
+    /* * 1. Paleta Principal "Sindcode" (Fonte da Verdade)
+     * Suas cores de marca originais
+     */
+    --sindcode-azul-principal: #1A2C50;  /* (Azul Sindcode) */
+    --sindcode-azul-tech: #00AEEF;       /* (Azul Tech) */
+    --sindcode-verde-acao: #A6E22E;      /* (Verde Renovação) */
+    --sindcode-roxo-comunidade: #C724B1; /* (Roxo Comunidade) */
+    --sindcode-fundo-claro: #F8F9FAFF;     /* (Branco Digital) */
+    --sindcode-texto-principal: #212529; /* (Grafite Texto) */
+    --sindcode-fundo-escuro: #121A2A;    /* (Grafite Profundo) */
+    --sindcode-texto-secundario: #ADB5BD;/* (Cinza Suporte) */
+    --sindcode-borda: #072a4c;           /* (Borda Sutil) */
+
+    /* * 2. Mapeamento para Variáveis do Bootstrap
+     * Aqui, "ensinamos" o Bootstrap a usar as suas cores
+     */
+    --bs-primary: var(--sindcode-azul-principal);
+    --bs-info: var(--sindcode-azul-tech);
+    --bs-success: var(--sindcode-verde-acao);
+    --bs-body-bg: var(--sindcode-fundo-claro);
+    --bs-body-color: var(--sindcode-texto-principal);
+    --bs-border-color: var(--sindcode-borda);
+
+    /* * 3. Fontes (do seu "novo formato")
+     */
+    --bs-font-sans-serif: 'Inter', sans-serif;
+}
+
+/* * 4. Estilos Globais (Corpo)
+ * Baseado no seu "novo formato"
+ */
+body {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    font-family: var(--bs-font-sans-serif);
+}
+
+/* * 5. Adaptação de classes Bootstrap (Helpers)
+ * Estas classes agora usam suas cores automaticamente
+ */
+.bg-primary {
+    /* Esta classe agora usará --sindcode-azul-principal */
+    background-color: var(--bs-primary) !important;
+}
+
+.text-info {
+    /* Esta classe agora usará --sindcode-azul-tech */
+    color: var(--bs-info) !important;
+}
+
+/* Exemplo para o botão de Ação (Verde) */
+.btn-success {
+    background-color: var(--bs-success) !important;
+    border-color: var(--bs-success) !important;
+    color: var(--sindcode-texto-principal) !important; /* Texto escuro no botão verde */
+}
+
+.btn-success:hover {
+    background-color: #96c92a !important; /* Um tom levemente mais escuro */
+    border-color: #96c92a !important;
+}
+
+/* Botão de Destaque (Azul Tech) */
+.btn-info {
+    background-color: var(--bs-info) !important;
+    border-color: var(--bs-info) !important;
+}
+
+.btn-info:hover {
+    background-color: #009ad8 !important; /* Um tom levemente mais escuro */
+    border-color: #009ad8 !important;
+}
+
+
+/* * 6. Estilo para Card de Notícia (do seu "novo formato")
+ * Já está usando as variáveis corretas (ex: --bs-info)
+ */
+.news-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 0.75rem; /* rounded-xl */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(26, 44, 80, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra usa o azul principal */
+}
+
+.news-card-highlight {
+    /* Perfeito, usando o azul tech */
+    border-top: 4px solid var(--bs-info);
+}
+
+.navbar-brand span {
+    font-size: 0.75rem;
+    font-weight: 300;
+    line-height: 1;
+    display: block;
+    color: rgba(173, 216, 230, 0.9);
+}
+
+/* * NOTA: Os estilos antigos (#topo, #midias_busca, main, footer)
+ * foram removidos. Agora, você deve aplicar as classes do
+ * Bootstrap (como "bg-primary", "text-secondary", "border")
+ * diretamente no seu HTML.
+ *
+ * Exemplo no HTML:
+ * <footer class="bg-primary" style="color: var(--sindcode-texto-secundario);">
+ * ...
+ * </footer>
+ * <main class="border">
+ * ...
+ * </main>
+ */
