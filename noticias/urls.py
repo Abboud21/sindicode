@@ -1,7 +1,9 @@
+
 from django.urls import path
-from noticias.views import index, autores, noticias
+from noticias.views import index, autores, noticias, buscar
 
 urlpatterns = [
     path('',noticias),
-    path('autor/',autores)
+    path('autor/',autores),
+    path('buscar',buscar,name='buscar'),
 ]

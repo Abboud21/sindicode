@@ -1,8 +1,8 @@
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
 from noticias.models import Categoria, Autor, Noticia
-
 
 # função
 # se def dentro classe = metodo
@@ -26,3 +26,6 @@ def autores(request):
     autores = Autor.objects.all()
     return render(request, 'noticias/nossos-autores.html', {'autores': autores})
 
+def buscar(request):
+    noticias = Noticia.objects.order_by('-data_publicacao').filter(destaque=5)
+    return render(request, 'noticias/buscar.html')
