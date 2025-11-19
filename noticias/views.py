@@ -1,5 +1,5 @@
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
 from noticias.models import Categoria, Autor, Noticia
@@ -38,3 +38,13 @@ def buscar(request):
 
             noticias = noticias.distinct()
     return render(request, 'noticias/buscar.html',{'noticias': noticias})
+
+
+def detalhe_noticia(request, noticia_id):
+    noticia_principal = get_object_or_404(Noticia, pk=noticia_id)
+    ultimas_noticias = Noticia.objects.exclude(pk=noticia_id).order_by('-data_publicacao')[:4]
+    contexto = {
+        'noticia': noticia_principal,
+        'ultimas_noticias': ultimas_noticias
+    }
+    return render(request, 'noticias/detalhe_noticia.html', contexto)
