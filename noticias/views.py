@@ -26,6 +26,15 @@ def autores(request):
     autores = Autor.objects.all()
     return render(request, 'noticias/nossos-autores.html', {'autores': autores})
 
+# Stripe - adicionar pagamento caminho inicial
 def buscar(request):
-    noticias = Noticia.objects.order_by('-data_publicacao').filter(destaque=5)
-    return render(request, 'noticias/buscar.html')
+    noticias = Noticia.objects.all()
+    if "buscar" in request.GET:
+        nome_buscar = request.GET["buscar"]
+        if nome_buscar:
+            busca_titulo = noticias.filter(titulo__icontains=nome_buscar)
+            busca_conteudo = noticias.filter(conteudo__icontains=nome_buscar)
+            noticias = busca_titulo | busca_conteudo
+
+            noticias = noticias.distinct()
+    return render(request, 'noticias/buscar.html',{'noticias': noticias})

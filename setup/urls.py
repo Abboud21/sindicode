@@ -1,3 +1,4 @@
+
 """setup URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -23,4 +24,3 @@ urlpatterns = [
     path('',include('noticias.urls')),
     path('',include('associados.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
