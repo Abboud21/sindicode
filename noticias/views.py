@@ -1,7 +1,6 @@
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-
 from noticias.models import Categoria, Autor, Noticia
 
 # função
@@ -19,8 +18,13 @@ def index(request):
     return render(request, 'noticias/index.html', {'cards': categorias})
 
 def noticias(request):
-    noticias = Noticia.objects.all()
-    return render(request, 'noticias/index.html', {'noticias': noticias})
+    destaque_principal = Noticia.objects.filter(destaque='0').order_by('-data_publicacao').first()
+    noticias = Noticia.objects.filter(destaque__in=['1', '2', '3']).order_by('-data_publicacao')
+    context = {
+        'destaque_principal': destaque_principal,
+        'noticias': noticias,
+    }
+    return render(request, 'noticias/index.html', context)
 
 def autores(request):
     autores = Autor.objects.all()
@@ -39,7 +43,6 @@ def buscar(request):
             noticias = noticias.distinct()
     return render(request, 'noticias/buscar.html',{'noticias': noticias})
 
-
 def detalhe_noticia(request, noticia_id):
     noticia_principal = get_object_or_404(Noticia, pk=noticia_id)
     ultimas_noticias = Noticia.objects.exclude(pk=noticia_id).order_by('-data_publicacao')[:4]
@@ -48,3 +51,25 @@ def detalhe_noticia(request, noticia_id):
         'ultimas_noticias': ultimas_noticias
     }
     return render(request, 'noticias/detalhe_noticia.html', contexto)
+
+def todas_noticias(request):
+    todas_noticias = Noticia.objects.all().order_by('-data_publicacao')
+
+    context = {
+        'noticias': todas_noticias,
+        'titulo_pagina': 'Todas as Notícias Publicadas'
+    }
+    return render(request, 'noticias/buscar.html', context)
+
+
+def categoria(request, categoria_id):
+    categoria = get_object_or_404(Categoria, id=categoria_id)
+
+    noticias_da_categoria = Noticia.objects.filter(categoria=categoria).order_by('-data_publicacao')
+
+    contexto = {
+        'categoria': categoria,
+        'noticias': noticias_da_categoria,
+    }
+
+    return render(request, 'noticias/categoria.html', contexto)

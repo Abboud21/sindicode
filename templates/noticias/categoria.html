@@ -1,0 +1,51 @@
+
+{% extends 'noticias/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-5">
+    <h1 class="fs-2 fw-bold text-primary mb-5 border-bottom pb-3">
+        Notícias em: <span class="text-info">{{ categoria.nome }}</span>
+    </h1>
+
+    <div class="row g-4">
+        {% if noticias %}
+            {% for noticia in noticias %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0">
+                    {% if noticia.foto %}
+                        <img src="{{ noticia.foto.url }}" class="card-img-top" alt="{{ noticia.titulo }}"
+                             style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <img src="{%static '/assets/imagens/noticias/notfound.jpg'%}" class="card-img-top"
+                             style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    
+                    <div class="card-body d-flex flex-column">
+                        <small class="text-muted mb-1">{{ noticia.data_publicacao|date:"d/m/Y" }}</small>
+                        <h5 class="card-title fw-bold lh-sm mb-3">
+                            {{ noticia.titulo|truncatechars:60 }}
+                        </h5>
+                        <p class="card-text small text-secondary">
+                            {{ noticia.conteudo|striptags|truncatechars:100 }}
+                        </p>
+                        <a href="{% url 'detalhe_noticia' noticia.id %}" class="btn btn-sm btn-info mt-auto stretched-link">
+                            Leia Mais →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-warning" role="alert">
+                    Não foram encontradas notícias na categoria **{{ categoria.nome }}**.
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'index' %}" class="btn btn-outline-primary mt-5">
+        ← Voltar para a página inicial
+    </a>
+</div>
+{% endblock %}
