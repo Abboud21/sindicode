@@ -1,4 +1,6 @@
-from django.db import models
+
+from django.db import models, transaction
+
 
 # estudar ORM (object-relation-mapper)
 class Categoria(models.Model):
@@ -23,6 +25,20 @@ class Noticia(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='noticias_categoria', null=False)
     def __str__(self):
         return self.titulo
+
+    def save(self, *args, **kwargs):
+        if self.destaque in ['0', '1', '2', '3']:
+            # Convertemos para inteiro para poder fazer contas (loop)
+            destaque_nivel = int(self.destaque)
+            with transaction.atomic():
+                # O Loop Mágico: Vamos do 3 descendo até o nível que inserimos.
+                for i in range(3, destaque_nivel - 1, -1):
+                    # Filtra as notícias do nível atual 'i'
+                    # .exclude(pk=self.pk) impede que mexamos na notícia que estamos salvando agora (caso seja edição)
+                    qs = Noticia.objects.filter(destaque=str(i)).exclude(pk=self.pk)
+                    # Atualiza elas para o nível logo abaixo (i + 1)
+                    qs.update(destaque=str(i + 1))
+        super().save(*args, **kwargs)
 # Create your models here.
 #python manage.py makemigrations
 #python manage.py migrate
