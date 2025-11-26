@@ -1,3 +1,4 @@
+
 /*
   ==============================================
   IDENTIDADE VISUAL SINDCODE - PALETA DE CORES
@@ -110,4 +111,9 @@ footer {
   height: 67px;
   background-color: var(--sindcode-azul-principal);
   color: var(--sindcode-texto-secundario); /* Texto claro sobre fundo escuro */
+}
+
+.busca-icone {
+    width: 2px;
+    height: 10px;
 }

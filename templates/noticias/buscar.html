@@ -7,12 +7,12 @@
 
         <div class="text-center mb-5">
             <h2 class="fw-bold text-primary d-inline-block border-bottom border-info border-3 pb-2">
-                Resultados da Pesquisa
+                Notícias
             </h2>
         </div>
 
         {% if noticias %}
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 justify-content-center">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-2 justify-content-center">
 
                 {% for noticia in noticias %}
                 <div class="col">
@@ -21,7 +21,7 @@
                         <div class="position-relative">
                             {% if noticia.foto %}
                                 <img src="{{ noticia.foto.url }}" class="card-img-top" alt="{{ noticia.titulo }}"
-                                     style="height: 220px; object-fit: cover;">
+                                     style="height: 180px; object-fit: cover;">
                             {% else %}
                                 <img src="{% static '/assets/imagens/noticias/notfound.jpg' %}" class="card-img-top"
                                      alt="Sem imagem" style="height: 220px; object-fit: cover;">
@@ -37,11 +37,11 @@
                                 <i class="bi bi-calendar-event me-1"></i>{{ noticia.data_publicacao|date:"d/m/Y" }}
                             </small>
 
-                            <h5 class="card-title fw-bold text-dark mb-3">
+                            <h5 class="card-title fw-bold text-dark mb-2">
                                 {{ noticia.titulo|truncatechars:45 }}
                             </h5>
 
-                            <p class="card-text small text-secondary mb-4 flex-grow-1">
+                            <p class="card-text small text-secondary mb-2 flex-grow-1">
                                 {{ noticia.conteudo|striptags|truncatechars:80 }}
                             </p>
 

@@ -107,6 +107,11 @@ body {
     color: rgba(173, 216, 230, 0.9);
 }
 
+.busca-icone {
+    width: 5px;
+    height: 20px;
+}
+
 /* * NOTA: Os estilos antigos (#topo, #midias_busca, main, footer)
  * foram removidos. Agora, você deve aplicar as classes do
  * Bootstrap (como "bg-primary", "text-secondary", "border")
