@@ -114,6 +114,8 @@ footer {
 }
 
 .busca-icone {
-    width: 2px;
-    height: 10px;
+    /* Define um tamanho fixo e pequeno para o ícone */
+    width: 18px;
+    height: 16px;
+    display: block; /* Garante que a imagem se comporte bem no layout */
 }

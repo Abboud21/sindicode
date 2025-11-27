@@ -39,6 +39,8 @@ class Noticia(models.Model):
                     # Atualiza elas para o nível logo abaixo (i + 1)
                     qs.update(destaque=str(i + 1))
         super().save(*args, **kwargs)
+
+
 # Create your models here.
 #python manage.py makemigrations
 #python manage.py migrate

@@ -1,21 +1,59 @@
-{% extends 'noticias/base.html' %} <!-- DTL - Django Template Language -->
+{% extends 'noticias/base.html' %}
 {% load static %}
+
 {% block content %}
-    <h1>Cadastro de associado</h1>
-    <form>
-        CPF <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX">
-        RG <input type="text" name="rg">
-        Nome Completo <input type="text" name="nome_completo">
-        Nome Social <input type="text" name="nome_social">
-        Genero
-        <select>
-            <option value="m">Masculino</option>
-            <option value="f">Feminino</option>
-            <option value="b">Binário</option>
-            <option value="o">Outros</option>
-            <option value="n">Prefiro não responder</option>
-        </select>
-        Data nascimento <input type="date" name="dt_nasc">
-        <input type="submit" value="cadastrar">
-    </form>
+
+<div class="container my-5">
+
+    <h2 class="text-primary mb-4">Cadastro de Associado</h2>
+
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{% url 'associados' %}" class="btn btn-success fw-bold">
+            + Novo Associado
+        </a>
+    </div>
+
+    <div class="card shadow-sm p-3">
+        <h5 class="mb-3">Página dos Associados</h5>
+
+        {% if associados %}
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>CPF</th>
+                        <th>Nome</th>
+                        <th>Gênero</th>
+                        <th>Data de Nascimento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for associado in associados %}
+                    <tr>
+                        <td>{{ associado.id }}</td>
+                        <td>{{ associado.cpf }}</td>
+                        <td>{{ associado.nome_completo }}</td>
+                        <td>{{ associado.genero }}</td>
+                        <td>{{ associado.data_nascimento|date:"d/m/Y" }}</td>
+
+                        <td>
+                            <a href="{% url 'editar_associado' associado.id %}" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="{% url 'deletar_associado' associado.id %}" class="btn btn-sm btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% else %}
+        <p class="text-muted">Nenhum associado cadastrado até o momento.</p>
+        {% endif %}
+    </div>
+
+</div>
+
 {% endblock %}
