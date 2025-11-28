@@ -8,7 +8,7 @@
     <h2 class="text-primary mb-4">Cadastro de Associado</h2>
 
     <div class="d-flex justify-content-end mb-3">
-        <a href="{% url 'associados' %}" class="btn btn-success fw-bold">
+        <a href="{% url 'cadastro' %}" class="btn btn-success fw-bold">
             + Novo Associado
         </a>
     </div>
@@ -40,8 +40,8 @@
                         <td>{{ associado.data_nascimento|date:"d/m/Y" }}</td>
 
                         <td>
-                            <a href="{% url 'editar_associado' associado.id %}" class="btn btn-sm btn-primary">Editar</a>
-                            <a href="{% url 'deletar_associado' associado.id %}" class="btn btn-sm btn-danger">Excluir</a>
+                            <a href="/admin/associados/associado/{{ associado.id }}/change/" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="/admin/associados/associado/" class="btn btn-sm btn-danger">Excluir</a>
                         </td>
                     </tr>
                     {% endfor %}

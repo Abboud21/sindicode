@@ -1,14 +1,60 @@
 CREATE DATABASE IF NOT EXISTS sindcode3;
 USE sindcode3;
-CREATE TABLE IF NOT EXISTS associado(
-	id_associado INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    cpf VARCHAR(20) NOT NULL,
-    rg VARCHAR(30),
-    nome_completo VARCHAR(100) NOT NULL,
-    nome_social VARCHAR(40),
-    genero VARCHAR(1),
-    data_nascimento DATE NOT NULL   
+
+CREATE TABLE Associado (
+    id_associado INT PRIMARY KEY AUTO_INCREMENT,
+    cpf VARCHAR(14) NOT NULL UNIQUE,         -- XXX.XXX.XXX-XX
+    rg VARCHAR(20) NOT NULL,
+    nome_completo VARCHAR(200) NOT NULL,
+    nome_social VARCHAR(200),
+    genero VARCHAR(50) NOT NULL,             -- Masculino, Feminino, etc.
+    data_nascimento DATE NOT NULL,
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- ------------------------------
+-- Endereço do associado
+-- ------------------------------
+CREATE TABLE Endereco (
+    id_endereco INT PRIMARY KEY AUTO_INCREMENT,
+    id_associado INT NOT NULL,
+    cep VARCHAR(10) NOT NULL,
+    rua VARCHAR(200) NOT NULL,
+    numero VARCHAR(10) NOT NULL,
+    complemento VARCHAR(100),
+    bairro VARCHAR(100) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    estado VARCHAR(2) NOT NULL,
+    FOREIGN KEY (id_associado) REFERENCES Associado(id_associado)
+        ON DELETE CASCADE
+);
+
+-- ------------------------------
+-- Contatos do associado
+-- ------------------------------
+CREATE TABLE Contato (
+    id_contato INT PRIMARY KEY AUTO_INCREMENT,
+    id_associado INT NOT NULL,
+    telefone VARCHAR(20),
+    celular VARCHAR(20),
+    email VARCHAR(150),
+    FOREIGN KEY (id_associado) REFERENCES Associado(id_associado)
+        ON DELETE CASCADE
+);
+
+-- ------------------------------
+-- Situação do associado
+-- ------------------------------
+CREATE TABLE SituacaoAssociado (
+    id_situacao INT PRIMARY KEY AUTO_INCREMENT,
+    id_associado INT NOT NULL,
+    status VARCHAR(50) NOT NULL,      -- ativo, afastado, inadimplente, desligado
+    observacao TEXT,
+    data_status TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_associado) REFERENCES Associado(id_associado)
+        ON DELETE CASCADE
+);
+
 
 CREATE TABLE IF NOT EXISTS autor(
 	id_autor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

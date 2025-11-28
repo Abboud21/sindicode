@@ -7,7 +7,7 @@
     <h2 class="text-primary mb-4">Cadastro de Associado</h2>
 
     <div class="card shadow-sm p-4">
-        <form method="POST">
+        <form method="POST" action="">
             {% csrf_token %}
 
             <div class="row mb-3">
@@ -24,7 +24,7 @@
 
             <div class="mb-3">
                 <label class="fw-bold">Nome Completo</label>
-                <input type="text" name="nome_completo" class="form-control" placeholder="Seu nome completo" required>
+               <input type="text" name="nome_completo" class="form-control" placeholder="Seu nome completo" value="{{ nome }}" required>
             </div>
 
             <div class="mb-3">
