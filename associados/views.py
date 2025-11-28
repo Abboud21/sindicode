@@ -1,6 +1,8 @@
 
 from django.shortcuts import render
 from .models import Associado
+from datetime import datetime
+
 
 
 def associados(request):
