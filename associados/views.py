@@ -6,8 +6,14 @@ from .models import Associado
 def associados(request):
     if 'associado_id' not in request.session:
         return redirect('login')
-    lista = Associado.objects.all().order_by('-id')
-    return render(request, 'associados/index.html', {'associados': lista})
+
+    lista = Associado.objects.all().order_by('nome_completo')
+
+    return render(request, 'associados/index.html', {
+        'associados': lista,
+        'nome_logado': request.session.get('associado_nome')
+    })
+
 
 # Cadastro de associado
 def cadastro(request):
@@ -46,7 +52,8 @@ def cadastro(request):
             data_nascimento=data_nascimento,
             email=email_post
         )
-        associado.set_senha(senha)
+
+        associado.definir_senha(senha)
         associado.save()
 
         return redirect("login")
@@ -56,6 +63,7 @@ def cadastro(request):
         "email": email,
     })
 
+
 # Login de associado
 def login(request):
     if request.method == 'POST':
@@ -64,25 +72,33 @@ def login(request):
 
         try:
             associado = Associado.objects.get(email=email)
+
             if associado.verificar_senha(senha):
                 request.session['associado_id'] = associado.id
                 request.session['associado_nome'] = associado.nome_completo
                 return redirect('associados')
             else:
-                return render(request, 'associados/login.html', {'erro': 'Senha incorreta.'})
+                return render(request, 'associados/login.html', {
+                    'erro': 'Senha incorreta.'
+                })
         except Associado.DoesNotExist:
-            return render(request, 'associados/login.html', {'erro': 'E-mail não cadastrado.'})
+            return render(request, 'associados/login.html', {
+                'erro': 'E-mail não cadastrado.'
+            })
 
     return render(request, 'associados/login.html')
+
 
 # Logout
 def logout(request):
     request.session.flush()
     return redirect('login')
 
+
 # Editar associado
 def editar_associado(request, id):
     associado = get_object_or_404(Associado, id=id)
+
     if request.method == "POST":
         associado.cpf = request.POST.get("cpf")
         associado.rg = request.POST.get("rg")
@@ -90,8 +106,11 @@ def editar_associado(request, id):
         associado.genero = request.POST.get("genero")
         associado.data_nascimento = request.POST.get("data_nascimento")
         associado.save()
+
         return redirect('associados')
+
     return render(request, 'associados/editar.html', {'associado': associado})
+
 
 # Deletar associado
 def deletar_associado(request, id):
