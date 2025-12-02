@@ -1,4 +1,6 @@
 from django.db import models
+from django.db import models
+from django.contrib.auth.hashers import make_password, check_password
 
 class Associado(models.Model):
     cpf = models.CharField(max_length=14, unique=True)
@@ -9,6 +11,14 @@ class Associado(models.Model):
     data_nascimento = models.DateField()
     data_cadastro = models.DateTimeField(auto_now_add=True)
     email = models.EmailField(max_length=150, blank=True, null=True)
+
+    senha = models.CharField(max_length=128)  # senha armazenada de forma segura
+
+    def set_senha(self, raw_senha):
+        self.senha = make_password(raw_senha)
+
+    def verificar_senha(self, raw_senha):
+        return check_password(raw_senha, self.senha)
 
     def __str__(self):
         return self.nome_completo

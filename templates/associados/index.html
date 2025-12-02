@@ -5,7 +5,7 @@
 
 <div class="container my-5">
 
-    <h2 class="text-primary mb-4">Cadastro de Associado</h2>
+    <h2 class="text-primary mb-4">Página dos Associados</h2>
 
     <div class="d-flex justify-content-end mb-3">
         <a href="{% url 'cadastro' %}" class="btn btn-success fw-bold">
@@ -14,7 +14,7 @@
     </div>
 
     <div class="card shadow-sm p-3">
-        <h5 class="mb-3">Página dos Associados</h5>
+        <h5 class="mb-3">Associados :</h5>
 
         {% if associados %}
         <div class="table-responsive">
@@ -24,6 +24,7 @@
                         <th>ID</th>
                         <th>CPF</th>
                         <th>Nome</th>
+                        <th>Email</th> <!-- nova coluna -->
                         <th>Gênero</th>
                         <th>Data de Nascimento</th>
                         <th>Ações</th>
@@ -36,6 +37,7 @@
                         <td>{{ associado.id }}</td>
                         <td>{{ associado.cpf }}</td>
                         <td>{{ associado.nome_completo }}</td>
+                        <td>{{ associado.email }}</td> <!-- exibindo o email -->
                         <td>{{ associado.genero }}</td>
                         <td>{{ associado.data_nascimento|date:"d/m/Y" }}</td>
 
@@ -47,6 +49,12 @@
                     {% endfor %}
                 </tbody>
             </table>
+        </div>
+
+        <div class="text-end mb-1">
+           <a href="{% url 'logout' %}" class="btn btn-outline-danger fw-bold shadow-sm">
+              <i class="bi bi-box-arrow-right"></i> Logout
+           </a>
         </div>
 
         {% else %}

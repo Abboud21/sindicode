@@ -6,7 +6,6 @@ CREATE TABLE Associado (
     cpf VARCHAR(14) NOT NULL UNIQUE,         -- XXX.XXX.XXX-XX
     rg VARCHAR(20) NOT NULL,
     nome_completo VARCHAR(200) NOT NULL,
-    nome_social VARCHAR(200),
     genero VARCHAR(50) NOT NULL,             -- Masculino, Feminino, etc.
     data_nascimento DATE NOT NULL,
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP

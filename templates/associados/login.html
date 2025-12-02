@@ -2,60 +2,28 @@
 {% load static %}
 
 {% block content %}
-
 <div class="container my-5">
-    <h2 class="text-primary mb-4">Página de Login</h2>
+    <h2 class="text-primary mb-4">Login de Associado</h2>
 
     <div class="card shadow-sm p-4">
+        {% if erro %}
+            <p class="text-danger fw-bold">{{ erro }}</p>
+        {% endif %}
+
         <form method="POST">
             {% csrf_token %}
-
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="fw-bold">CPF</label>
-                    <input type="text" name="cpf" class="form-control" placeholder="XXX.XXX.XXX-XX" required>
-                </div>
-
-                <div class="col-md-6">
-                    <label class="fw-bold">RG</label>
-                    <input type="text" name="rg" class="form-control" placeholder="Digite seu RG" required>
-                </div>
+            <div class="mb-3">
+                <label class="fw-bold">E-mail</label>
+                <input type="email" name="email" class="form-control" placeholder="email@example.com" required>
             </div>
 
             <div class="mb-3">
-                <label class="fw-bold">Nome Completo</label>
-                <input type="text" name="nome_completo" class="form-control" placeholder="Seu nome completo" required>
+                <label class="fw-bold">Senha</label>
+                <input type="password" name="senha" class="form-control" placeholder="Digite sua senha" required>
             </div>
 
-            <div class="mb-3">
-                <label class="fw-bold">Nome Social</label>
-                <input type="text" name="nome_social" class="form-control" placeholder="Opcional">
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="fw-bold">Gênero</label>
-                    <select class="form-select" name="genero" required>
-                        <option value="">Selecione...</option>
-                        <option>Masculino</option>
-                        <option>Feminino</option>
-                        <option>Binário</option>
-                        <option>Outros</option>
-                        <option>Prefiro não responder</option>
-                    </select>
-                </div>
-
-                <div class="col-md-6">
-                    <label class="fw-bold">Data de Nascimento</label>
-                    <input type="date" name="data_nascimento" class="form-control" required>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary fw-bold mt-2">
-                Entrar
-            </button>
+            <button type="submit" class="btn btn-primary fw-bold mt-2">Entrar</button>
         </form>
     </div>
 </div>
-
 {% endblock %}
