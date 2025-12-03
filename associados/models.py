@@ -10,15 +10,26 @@ class Associado(models.Model):
     data_nascimento = models.DateField()
     data_cadastro = models.DateTimeField(auto_now_add=True)
 
-    email = models.EmailField(max_length=150, unique=True)  # agora é obrigatório no login
+    email = models.EmailField(max_length=150, unique=True)
 
-    senha = models.CharField(max_length=128)  # senha com hash seguro
+    senha = models.CharField(max_length=128)
 
+    # --- MÉTODOS DE SENHA ---
     def definir_senha(self, senha):
         self.senha = make_password(senha)
 
     def verificar_senha(self, senha):
         return check_password(senha, self.senha)
+
+    # --- CONVERTE SENHA PRA HASH AUTOMATICAMENTE NO ADMIN ---
+    def save(self, *args, **kwargs):
+        try:
+            # Se a senha NÃO for hash, identify_hasher() falha → hash é criado
+            identify_hasher(self.senha)
+        except Exception:
+            self.senha = make_password(self.senha)
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.nome_completo
